@@ -31,8 +31,8 @@
       <label><input type="radio" name="question_{{ forloop.parentloop.counter0 }}" value="{{ forloop.counter0 }}" required><span>{{ option }}</span></label>
       {% endfor %}
     </fieldset>
+    {% endfor %}
     <button class="primary" type="submit">Comprobar respuestas</button>
   </form>
 </section>
 {% endblock %}
-
