@@ -1,0 +1,38 @@
+{% extends "learning/base.html" %}
+{% block title %}{{ lesson.title }} · Don Olé{% endblock %}
+{% block content %}
+<section class="lesson-heading">
+  <a href="{% url 'learning:home' %}">← Cambiar perfil</a>
+  <p class="eyebrow">{{ audience.icon }} {{ audience.label }} · Nivel {{ level }}</p>
+  <h1>{{ lesson.title }}</h1>
+  <p class="lead">{{ lesson.subtitle }}</p>
+</section>
+
+<section class="lesson-grid">
+  <div>
+    <h2>Palabras para hoy</h2>
+    <div class="word-list">
+      {% for word in lesson.words %}
+      <article><b>{{ word.emoji }}</b><div><strong>{{ word.spanish }}</strong><small>{{ word.english }}</small></div></article>
+      {% endfor %}
+    </div>
+  </div>
+
+  <form class="quiz" method="post">
+    {% csrf_token %}
+    <h2>El reto de Don Olé</h2>
+    {% if score is not None %}
+    <div class="score">¡Olé! Has acertado <strong>{{ score }} de {{ total }}</strong>.</div>
+    {% endif %}
+    {% for question in lesson.questions %}
+    <fieldset>
+      <legend>{{ forloop.counter }}. {{ question.prompt }}</legend>
+      {% for option in question.options %}
+      <label><input type="radio" name="question_{{ forloop.parentloop.counter0 }}" value="{{ forloop.counter0 }}" required><span>{{ option }}</span></label>
+      {% endfor %}
+    </fieldset>
+    <button class="primary" type="submit">Comprobar respuestas</button>
+  </form>
+</section>
+{% endblock %}
+
