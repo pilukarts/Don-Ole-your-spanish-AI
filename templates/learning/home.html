@@ -1,0 +1,39 @@
+{% extends "learning/base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">APRENDE · JUEGA · HABLA</p>
+    <h1>Aprende español<br><em>a tu manera.</em></h1>
+    <p class="lead">Vocabulario práctico, lecciones con personalidad y juegos para usar el español desde el primer día.</p>
+  </div>
+  <div class="sun" aria-hidden="true">¡Hola!</div>
+</section>
+
+<form class="setup-card" action="{% url 'learning:lesson' %}" method="get">
+  <h2>Prepara tu aventura</h2>
+  <fieldset>
+    <legend>1. ¿Para quién es la lección?</legend>
+    <div class="choices audience-choices">
+      {% for key, item in audiences.items %}
+      <label><input type="radio" name="audience" value="{{ key }}" {% if key == 'jovenes' %}checked{% endif %}><span>{{ item.icon }} {{ item.label }}</span></label>
+      {% endfor %}
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>2. Elige tu nivel</legend>
+    <div class="choices level-choices">
+      {% for level in levels %}
+      <label><input type="radio" name="level" value="{{ level }}" {% if level == 'A1' %}checked{% endif %}><span>{{ level }}</span></label>
+      {% endfor %}
+    </div>
+  </fieldset>
+  <button class="primary" type="submit">Empezar la primera lección →</button>
+</form>
+
+<section class="features">
+  <article><b>🗣️</b><h3>Español real</h3><p>Frases que puedes usar hoy mismo.</p></article>
+  <article><b>🎯</b><h3>A tu nivel</h3><p>Un camino desde A1 hasta C2.</p></article>
+  <article><b>🎮</b><h3>Aprende jugando</h3><p>Retos cortos, puntos y mucha práctica.</p></article>
+</section>
+{% endblock %}
+
