@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: don-ole
+    runtime: python
+    buildCommand: bash build.sh
+    startCommand: python -m gunicorn don_ole.wsgi:application
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
