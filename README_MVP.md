@@ -35,3 +35,8 @@ python manage.py test
 3. Crear más tipos de juegos y contenido por edad.
 4. Integrar IA para generar prácticas personalizadas con controles de seguridad.
 
+## Publicar en Render
+
+El repositorio incluye `render.yaml` y `build.sh`. En Render, crea un Blueprint,
+conecta este repositorio y aplica la configuración detectada. Render generará la
+clave secreta y publicará la web en una dirección `.onrender.com`.
